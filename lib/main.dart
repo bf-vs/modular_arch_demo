@@ -55,15 +55,20 @@ class _RootView extends StatefulWidget {
 class __RootViewState extends State<_RootView> {
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: appState,
-      builder: (context, _) {
-        return Stack(
-          children: appState.pages
-              .map((page) => Positioned.fill(child: Focus(child: page)))
-              .toList(),
-        );
-      },
+    return GestureDetector(
+      onTap: FocusManager.instance.primaryFocus?.unfocus,
+      child: AnimatedBuilder(
+        animation: appState,
+        builder: (context, _) {
+          return Stack(
+            children: appState.pages
+                .map(
+                  (page) => Positioned.fill(child: page),
+                )
+                .toList(),
+          );
+        },
+      ),
     );
   }
 }
